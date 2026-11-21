@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pulso — Mensajería Privada</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="toast-container" aria-live="polite"></div>
+
+  <div id="app-shell">
+    <header id="top-bar">
+      <div class="brand">
+        <span class="status-dot"></span>
+        <span>Pulso</span>
+      </div>
+
+      <nav id="session-controls" class="hidden">
+        <span id="active-user-badge"></span>
+        <span id="my-code-badge"></span>
+        <button type="button" id="btn-test-toast">Probar aviso</button>
+        <button type="button" id="btn-logout">Salir</button>
+      </nav>
+    </header>
+
+    <main id="workspace">
+      <!-- Acceso: usuario, contraseña y código de invitación -->
+      <section id="auth-panel">
+        <h2>Acceso y registro</h2>
+        <p id="immutability-notice">
+          Aviso: una vez creados tu usuario, contraseña y código de invitación,
+          ya no se podrán modificar para evitar que alguien suplante tu
+          identidad. Si olvidas tus datos y creas otra cuenta, los anteriores
+          quedarán guardados en la base de datos por si necesitas recuperarlos.
+        </p>
+
+        <form id="auth-form">
+          <label for="auth-username">Usuario</label>
+          <input
+            id="auth-username"
+            name="username"
+            type="text"
+            minlength="3"
+            maxlength="24"
+            placeholder="Elige tu usuario"
+            required
+          />
+
+          <label for="auth-password">Contraseña</label>
+          <input
+            id="auth-password"
+            name="password"
+            type="password"
+            minlength="6"
+            placeholder="Tu contraseña"
+            required
+          />
+
+          <label for="auth-invite-code">Código de invitación</label>
+          <input
+            id="auth-invite-code"
+            name="inviteCode"
+            type="text"
+            minlength="4"
+            maxlength="16"
+            placeholder="Tu código privado único"
+            required
+          />
+
+          <button type="submit" id="btn-submit-auth">Entrar o crear cuenta</button>
+          <p id="auth-feedback" role="status"></p>
+        </form>
+      </section>
+
+      <!-- Contactos privados añadidos por código mutuo -->
+      <aside id="contacts-panel" class="hidden">
+        <h3>Añadir por código</h3>
+        <form id="add-contact-form">
+          <label for="contact-code-input">Código de otra persona</label>
+          <input
+            id="contact-code-input"
+            name="contactCode"
+            type="text"
+            minlength="4"
+            maxlength="16"
+            placeholder="Ingresa su código"
+            required
+          />
+          <button type="submit" id="btn-add-contact">Vincular</button>
+        </form>
+
+        <h3>Contactos</h3>
+        <div id="contacts-list"></div>
+      </aside>
+
+      <!-- Chat privado 1 a 1 -->
+      <section id="chat-panel" class="hidden">
+        <div id="chat-header">
+          <strong id="chat-peer-name">Sin contacto seleccionado</strong>
+          <span id="chat-peer-presence"></span>
+        </div>
+
+        <div id="messages-list"></div>
+
+        <form id="message-form" class="hidden">
+          <label for="message-input">Mensaje</label>
+          <input
+            id="message-input"
+            name="message"
+            type="text"
+            maxlength="2000"
+            placeholder="Escribe un mensaje..."
+            autocomplete="off"
+            required
+          />
+          <button type="submit" id="btn-send-message">Enviar</button>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
