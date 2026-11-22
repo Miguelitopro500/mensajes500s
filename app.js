@@ -500,11 +500,17 @@ if (savedUser) {
 }
 
 dom.authForm.addEventListener("submit", () => {
-  setTimeout(() => {
+  let tries = 0;
+  const checkLogin = setInterval(() => {
+    tries++;
     if (state.currentUser) {
       localStorage.setItem("pulso_saved_user", JSON.stringify(state.currentUser));
+      clearInterval(checkLogin);
     }
-  }, 600);
+    if (tries >= 25) {
+      clearInterval(checkLogin);
+    }
+  }, 200);
 });
 
 dom.btnLogout.addEventListener("click", () => {
