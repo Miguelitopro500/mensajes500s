@@ -234,6 +234,7 @@ async function handleAuthSubmit(event) {
   subscribeRealtime();
   showInAppToast("Cuenta creada", "Tus datos quedaron guardados y protegidos.");
   renderApp();
+  localStorage.setItem("pulso_saved_user", JSON.stringify(state.currentUser));
 }
 
 // Obtener contactos vinculados al usuario actual y verificar si son mutuos
@@ -487,4 +488,25 @@ if (btnTogglePassword) {
   });
 }
 
-renderApp();
+const savedUser = localStorage.getItem("pulso_saved_user");
+if (savedUser) {
+  state.currentUser = JSON.parse(savedUser);
+  syncFromDatabase().then(() => {
+    subscribeRealtime();
+    renderApp();
+  });
+} else {
+  renderApp();
+}
+
+dom.authForm.addEventListener("submit", () => {
+  setTimeout(() => {
+    if (state.currentUser) {
+      localStorage.setItem("pulso_saved_user", JSON.stringify(state.currentUser));
+    }
+  }, 600);
+});
+
+dom.btnLogout.addEventListener("click", () => {
+  localStorage.removeItem("pulso_saved_user");
+}, true);
