@@ -48,14 +48,18 @@
           />
 
           <label for="auth-password">Contraseña</label>
-          <input
-            id="auth-password"
-            name="password"
-            type="password"
-            minlength="6"
-            placeholder="Tu contraseña"
-            required
-          />
+          <div style="display:flex;gap:8px;align-items:center;">
+            <input
+              id="auth-password"
+              name="password"
+              type="password"
+              minlength="6"
+              placeholder="Tu contraseña"
+              required
+              style="flex:1;"
+            />
+            <button type="button" id="btn-toggle-password">Ver</button>
+          </div>
 
           <label for="auth-invite-code">Código de invitación</label>
           <input

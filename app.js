@@ -164,7 +164,7 @@ async function handleAuthSubmit(event) {
     .maybeSingle();
 
   if (findErr) {
-    dom.authFeedback.textContent = "Error al consultar la base de datos.";
+    dom.authFeedback.textContent = "Error al consultar la base de datos: " + findErr.message;
     return;
   }
 
@@ -477,5 +477,14 @@ dom.addContactForm.addEventListener("submit", handleAddContact);
 dom.messageForm.addEventListener("submit", handleSendMessage);
 dom.btnLogout.addEventListener("click", handleLogout);
 dom.btnTestToast.addEventListener("click", handleTestIncoming);
+
+const btnTogglePassword = document.getElementById("btn-toggle-password");
+if (btnTogglePassword) {
+  btnTogglePassword.addEventListener("click", () => {
+    const hidden = dom.authPassword.type === "password";
+    dom.authPassword.type = hidden ? "text" : "password";
+    btnTogglePassword.textContent = hidden ? "Ocultar" : "Ver";
+  });
+}
 
 renderApp();
