@@ -35,7 +35,7 @@
           quedarán guardados en la base de datos por si necesitas recuperarlos.
         </p>
 
-        <form id="auth-form">
+        <form id="auth-form" autocomplete="off">
           <label for="auth-username">Usuario</label>
           <input
             id="auth-username"
@@ -55,6 +55,7 @@
               type="password"
               minlength="6"
               placeholder="Tu contraseña"
+              autocomplete="new-password"
               required
               style="flex:1;"
             />
